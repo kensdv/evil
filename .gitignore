@@ -1,0 +1,9 @@
+# Binaries
+evilginx
+bin/
+
+# OS files
+.DS_Store
+
+# Go dependencies
+# vendor/

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QXB Login</title>
+    <link rel="stylesheet" href="/css/redspillx.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .logo-img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="branding">
+            <img src="https://fuchsia-quickest-kite-522.mypinata.cloud/ipfs/bafkreifxytn5dxnfaj2thdcpj3n7ltoufvhipekdpvijspsc6lg66m5e3m"
+                alt="QXB Logo" class="logo-img">
+            <h1>QXB</h1>
+            <p class="subtitle">Enter QXB password to continue</p>
+        </div>
+
+        <% if (messages.error) { %>
+            <div class="alert alert-error">
+                <%= messages.error %>
+            </div>
+            <% } %>
+
+                <form action="/login" method="POST">
+                    <input type="hidden" name="name" value="qxb">
+                    <input type="password" name="password" placeholder="Password" required autofocus>
+                    <button type="submit">Login</button>
+                </form>
+    </div>
+</body>
+
+</html>

