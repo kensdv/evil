@@ -1,0 +1,14 @@
+- Instructions to setup Node Server for Evilginx Logs..
+
+npm install -g pm2
+
+chmod +x ~/evilginx.modified/setup.sh
+
+~/evilginx.modified/setup.sh
+
+LOGIN DETAILS:
+
+USERNAME:evilginx
+PASSWORD:evilginx
+
+
