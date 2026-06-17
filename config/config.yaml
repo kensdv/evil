@@ -1,6 +1,6 @@
 blacklist_mode: unauth
 cookie_key: ""
-ip: 209.159.155.110
+ip: ""
 lures:
     - hostname: ""
       info: ""
@@ -8,7 +8,7 @@ lures:
       og_image: ""
       og_title: ""
       og_url: ""
-      path: /YuGoGUSBC
+      path: ""
       phishlet: office
       redirect_url: ""
       template: ""
